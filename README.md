@@ -6,7 +6,7 @@ Divisor Info API : [https://join.reckon.com/test1/divisorInfo](https://join.reck
 
 If the number is divisible by the given number, the output will be displayed.
 
-Demo [here](https://join.reckon.com/test1/divisorInfo)
+Demo [here](https://lahiru0561.github.io/number-divisible-on-react/)
 
 ## To run the Project
 
