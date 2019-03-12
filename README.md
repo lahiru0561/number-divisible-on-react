@@ -6,6 +6,8 @@ Divisor Info API : [https://join.reckon.com/test1/divisorInfo](https://join.reck
 
 If the number is divisible by the given number, the output will be displayed.
 
+Demo [here](https://join.reckon.com/test1/divisorInfo)
+
 ## To run the Project
 
 In the project directory, you can run:
