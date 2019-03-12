@@ -7,7 +7,8 @@ export class Divisible extends Component {
     this.state = {
       rangers: '',
       divisorInfo: '',
-      error: {}
+      error: {},
+      isLoading: {}
     };
     this.getRangers = this.getRangers.bind(this);
     this.getDivisorInfo = this.getDivisorInfo.bind(this);
@@ -18,37 +19,46 @@ export class Divisible extends Component {
     this.getDivisorInfo();
   }
   getRangers() {
-    console.log('getRangers');
-    this.setState({ error: { rangeError: '' } });
+    this.setState({
+      error: { rangeError: '' },
+      isLoading: { rangers: true }
+    });
     axios
       .get(`https://join.reckon.com/test1/rangeInfo`)
       .then(res => {
         //set vlaue
-        console.log('res', res);
-        this.setState({ rangers: res.data });
+
+        this.setState({ rangers: res.data, isLoading: { rangers: false } });
       })
       .catch(err => {
         //handle error
-        console.log('error', err);
-        this.setState({ error: { rangeError: 'Error in getting Ranges' } });
+
+        this.setState({
+          error: { rangeError: 'Error in getting Ranges' },
+          isLoading: { rangers: false }
+        });
       });
   }
 
   getDivisorInfo() {
-    this.setState({ error: { divisorError: '' } });
-    console.log('getDivisorInfo');
+    this.setState({
+      error: { divisorError: '' },
+      isLoading: { divisor: true }
+    });
+
     axios
       .get(`https://join.reckon.com/test1/divisorInfo`)
       .then(res => {
         //set vlaue
-        console.log('res', res);
-        this.setState({ divisorInfo: res.data });
+
+        this.setState({ divisorInfo: res.data, isLoading: { divisor: false } });
       })
       .catch(err => {
         //handle error
-        console.log('error', err);
+
         this.setState({
-          error: { divisorError: 'Error in getting Divisor Details' }
+          error: { divisorError: 'Error in getting Divisor Details' },
+          isLoading: { divisor: false }
         });
       });
   }
@@ -74,6 +84,21 @@ export class Divisible extends Component {
               <div className="col-md-6">
                 Upper Range : {this.state.rangers.upper}
               </div>
+            </div>
+          </div>
+        </div>
+      );
+    } else if (this.state.isLoading.rangers) {
+      rangers = (
+        <div className="row">
+          <div className="col-md-12">
+            <div className="row">
+              <div className="col-md-6">
+                <h4>Rangers</h4>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-12 ">loading...</div>
             </div>
           </div>
         </div>
@@ -117,6 +142,21 @@ export class Divisible extends Component {
                 </div>
               );
             })}
+          </div>
+        </div>
+      );
+    } else if (this.state.isLoading.divisor) {
+      divisors = (
+        <div className="row">
+          <div className="col-md-12">
+            <div className="row">
+              <div className="col-md-6">
+                <h4>Divisors</h4>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-12 ">loading...</div>
+            </div>
           </div>
         </div>
       );
@@ -184,7 +224,6 @@ export class Divisible extends Component {
 
     return (
       <div className="row">
-        D
         <div className="col-md-12">
           <div className="row">
             <div className="col-md-12">{rangers}</div>
