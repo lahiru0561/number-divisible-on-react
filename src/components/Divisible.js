@@ -18,31 +18,35 @@ export class Divisible extends Component {
     this.getDivisorInfo();
   }
   getRangers() {
+    console.log('getRangers');
     this.setState({ error: { rangeError: '' } });
     axios
       .get(`https://join.reckon.com/test1/rangeInfo`)
       .then(res => {
         //set vlaue
-
+        console.log('res', res);
         this.setState({ rangers: res.data });
       })
       .catch(err => {
         //handle error
+        console.log('error', err);
         this.setState({ error: { rangeError: 'Error in getting Ranges' } });
       });
   }
 
   getDivisorInfo() {
     this.setState({ error: { divisorError: '' } });
+    console.log('getDivisorInfo');
     axios
       .get(`https://join.reckon.com/test1/divisorInfo`)
       .then(res => {
         //set vlaue
-
+        console.log('res', res);
         this.setState({ divisorInfo: res.data });
       })
       .catch(err => {
         //handle error
+        console.log('error', err);
         this.setState({
           error: { divisorError: 'Error in getting Divisor Details' }
         });
@@ -180,6 +184,7 @@ export class Divisible extends Component {
 
     return (
       <div className="row">
+        D
         <div className="col-md-12">
           <div className="row">
             <div className="col-md-12">{rangers}</div>
